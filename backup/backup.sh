@@ -10,7 +10,7 @@ COLBG1="$(cat /etc/ssnvpn/theme/$colornow | grep -w "BG" | cut -d: -f2|sed 's/ /
 ###########- END COLOR CODE -##########
 
 BURIQ () {
-    curl -sS https://raw.githubusercontent.com/yasanata/permission/main/ipmini > /root/tmp
+    curl -sS https://raw.githubusercontent.com/scscp/permission/main/ipmini > /root/tmp
     data=( `cat /root/tmp | grep -E "^### " | awk '{print $2}'` )
     for user in "${data[@]}"
     do
@@ -28,7 +28,7 @@ BURIQ () {
 }
 
 MYIP=$(curl -sS ipv4.icanhazip.com)
-Name=$(curl -sS https://raw.githubusercontent.com/yasanata/permission/main/ipmini | grep $MYIP | awk '{print $2}')
+Name=$(curl -sS https://raw.githubusercontent.com/scscp/permission/main/ipmini | grep $MYIP | awk '{print $2}')
 echo $Name > /usr/local/etc/.$Name.ini
 CekOne=$(cat /usr/local/etc/.$Name.ini)
 
@@ -45,7 +45,7 @@ fi
 
 PERMISSION () {
     MYIP=$(curl -sS ipv4.icanhazip.com)
-    IZIN=$(curl -sS https://raw.githubusercontent.com/yasanata/permission/main/ipmini | awk '{print $4}' | grep $MYIP)
+    IZIN=$(curl -sS https://raw.githubusercontent.com/scscp/permission/main/ipmini | awk '{print $4}' | grep $MYIP)
     if [ "$MYIP" = "$IZIN" ]; then
     Bloman
     else
@@ -72,10 +72,10 @@ fi
 IP=$(curl -sS ipv4.icanhazip.com);
 date=$(date +"%Y-%m-%d")
 
-itoken=$(curl -sS https://raw.githubusercontent.com/yasanata/update/main/asu)
+itoken=$(curl -sS https://raw.githubusercontent.com/scscp/update/main/asu)
 
 MYIP=$(curl -sS ipv4.icanhazip.com)
-NameUser=$(curl -sS https://raw.githubusercontent.com/yasanata/permission/main/ipmini | grep $MYIP | awk '{print $2}')
+NameUser=$(curl -sS https://raw.githubusercontent.com/scscp/permission/main/ipmini | grep $MYIP | awk '{print $2}')
 
 
 clear
@@ -111,7 +111,7 @@ zip -rP $InputPass $NameUser.zip backup > /dev/null 2>&1
 ##############++++++++++++++++++++++++#############
 LLatest=`date`
 Get_Data () {
-git clone https://github.com/yasanata/userbackup.git /root/userbackup/ &> /dev/null
+git clone https://github.com/V/userbackup.git /root/userbackup/ &> /dev/null
 }
 
 Mkdir_Data () {
@@ -132,14 +132,14 @@ Save_And_Exit () {
     DATE=$(date +'%d %B %Y')
     cd /root/userbackup
     git config --global user.email "yasanata@gmail.com" &> /dev/null
-    git config --global user.name "yasanata" &> /dev/null
+    git config --global user.name "scscp" &> /dev/null
     rm -rf .git &> /dev/null
     git init &> /dev/null
     git add . &> /dev/null
     git commit -m backup &> /dev/null
     git branch -M main &> /dev/null
-    git remote add origin https://github.com/yasanata/userbackup
-    git push -f https://$itoken@github.com/yasanata/userbackup.git &> /dev/null
+    git remote add origin https://github.com/scscp/userbackup
+    git push -f https://$itoken@github.com/scscp/userbackup.git &> /dev/null
 }
 
 if [ ! -d "/root/userbackup/" ]; then
