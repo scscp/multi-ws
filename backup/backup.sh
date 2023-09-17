@@ -131,7 +131,7 @@ mv /root/$NameUser.zip /root/userbackup/$NameUser/
 Save_And_Exit () {
     DATE=$(date +'%d %B %Y')
     cd /root/userbackup
-    git config --global user.email "yasanata@gmail.com" &> /dev/null
+    git config --global user.email "candravpnz@gmail.com" &> /dev/null
     git config --global user.name "scscp" &> /dev/null
     rm -rf .git &> /dev/null
     git init &> /dev/null
@@ -177,7 +177,7 @@ rm -rf /root/userbackup &> /dev/null
 rm -f /root/$NameUser.zip &> /dev/null
 echo -e "$COLOR1└─────────────────────────────────────────────────┘${NC}" 
 echo -e "$COLOR1┌────────────────────── BY ───────────────────────┐${NC}"
-echo -e "$COLOR1│${NC}              • WWW.YASANATA.NINJA •                $COLOR1│$NC"
+echo -e "$COLOR1│${NC}              • WWW.scsc.NINJA •                $COLOR1│$NC"
 echo -e "$COLOR1└─────────────────────────────────────────────────┘${NC}" 
 echo
 read -n 1 -s -r -p "   Press any key to back on menu"
