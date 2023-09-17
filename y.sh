@@ -3,52 +3,6 @@ dateFromServer=$(curl -v --insecure --silent https://google.com/ 2>&1 | grep Dat
 biji=`date +"%Y-%m-%d" -d "$dateFromServer"`
 #########################
 
-BURIQ () {
-curl -sS https://raw.githubusercontent.com/scscp/permission/main/ipmini > /root/tmp
-    data=( `cat /root/tmp | grep -E "^### " | awk '{print $2}'` )
-    for user in "${data[@]}"
-    do
-    exp=( `grep -E "^### $user" "/root/tmp" | awk '{print $3}'` )
-    d1=(`date -d "$exp" +%s`)
-    d2=(`date -d "$biji" +%s`)
-    exp2=$(( (d1 - d2) / 86400 ))
-    if [[ "$exp2" -le "0" ]]; then
-    echo $user > /etc/.$user.ini
-    else
-    rm -f /etc/.$user.ini > /dev/null 2>&1
-    fi
-    done
-    rm -f /root/tmp
-}
-
-MYIP=$(curl -sS ipv4.icanhazip.com)
-Name=$(curl -sS https://raw.githubusercontent.com/scscp/permission/main/ipmini | grep $MYIP | awk '{print $2}')
-echo $Name > /usr/local/etc/.$Name.ini
-CekOne=$(cat /usr/local/etc/.$Name.ini)
-
-Bloman () {
-if [ -f "/etc/.$Name.ini" ]; then
-CekTwo=$(cat /etc/.$Name.ini)
-    if [ "$CekOne" = "$CekTwo" ]; then
-        res="Expired"
-    fi
-else
-res="Permission Accepted..."
-fi
-}
-
-PERMISSION () {
-    MYIP=$(curl -sS ipv4.icanhazip.com)
-    IZIN=$(curl -sS https://raw.githubusercontent.com/scscp/permission/main/ipmini | awk '{print $4}' | grep $MYIP)
-    if [ "$MYIP" = "$IZIN" ]; then
-    Bloman
-    else
-    res="Permission Denied!"
-    fi
-    BURIQ
-}
-
-clear
 red='\e[1;31m'
 green='\e[0;32m'
 yell='\e[1;33m'
@@ -94,41 +48,6 @@ if [ "" = "$PKG_OK" ]; then
   echo "No $REQUIRED_PKG. Setting up $REQUIRED_PKG."
   apt-get --yes install $REQUIRED_PKG
   sleep 1
-  echo ""
-  sleep 1
-  echo -e "[ ${tyblue}NOTES${NC} ] If error you need.. to do this"
-  sleep 1
-  echo ""
-  sleep 1
-  echo -e "[ ${tyblue}NOTES${NC} ] 1. apt update -y"
-  sleep 1
-  echo -e "[ ${tyblue}NOTES${NC} ] 2. apt upgrade -y"
-  sleep 1
-  echo -e "[ ${tyblue}NOTES${NC} ] 3. apt dist-upgrade -y"
-  sleep 1
-  echo -e "[ ${tyblue}NOTES${NC} ] 4. reboot"
-  sleep 1
-  echo ""
-  sleep 1
-  echo -e "[ ${tyblue}NOTES${NC} ] After rebooting"
-  sleep 1
-  echo -e "[ ${tyblue}NOTES${NC} ] Then run this script again"
-  echo -e "[ ${tyblue}NOTES${NC} ] Notes, Script By : YasaNata"
-  echo -e "[ ${tyblue}NOTES${NC} ] if you understand then tap enter now.."
-  read
-else
-  echo -e "[ ${green}INFO${NC} ] Oke installed"
-fi
-
-ttet=`uname -r`
-ReqPKG="linux-headers-$ttet"
-if ! dpkg -s $ReqPKG  >/dev/null 2>&1; then
-  rm /root/setup.sh >/dev/null 2>&1 
-  exit
-else
-  clear
-fi
-
 
 secs_to_human() {
     echo "Installation time : $(( ${1} / 3600 )) hours $(( (${1} / 60) % 60 )) minute's $(( ${1} % 60 )) seconds"
